@@ -1,9 +1,15 @@
 package com.hrms.entity;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.DateSerializer;
 
@@ -14,6 +20,7 @@ import com.fasterxml.jackson.databind.ser.std.DateSerializer;
  *
  */
 @Entity
+@Table(name = "users")
 public class Employee extends BaseEntity {
 
     private static final long serialVersionUID = 2255864692860278374L;
@@ -21,18 +28,20 @@ public class Employee extends BaseEntity {
     /** 个人邮件地址 **/
     private String email;
     /** 密码 **/
+    @JsonIgnore
     private String encryptedPassword;
     /** 姓名 **/
     private String name;
-    /**
-     * 员工信息录入状态 0：未录入，1：已保存，2：已提交
-     **/
+    /** 员工信息录入状态 0：未录入，1：已保存，2：已提交 **/
     private Integer state = 0;
     /** 重置密码 **/
+    @JsonIgnore
     private String resetPasswordToken;
     /** 重置密码时间 **/
+    @JsonIgnore
     private String resetPasswordSentAt;
     /** 记住我的时间 **/
+    @JsonIgnore
     private Date rememberCreatedAt;
     /** 登陆成功次数 **/
     private Long signInCount;
@@ -41,23 +50,46 @@ public class Employee extends BaseEntity {
     /** 最近一次登录时间 **/
     private Date lastSignInAt;
     /** 当前登录ip **/
+    @JsonIgnore
     private String currentSignInIp;
     /** 最近一次登录ip **/
+    @JsonIgnore
     private String lastSignInIp;
     /** 是否激活 **/
     private String confirmationToken;
     /** 激活时间 **/
+    @JsonIgnore
     private Date confirmedAt;
     /** 激活发送邮件时间 **/
+    @JsonIgnore
     private Date confirmationSentAt;
     /** 非激活邮件地址 **/
+    @JsonIgnore
     private String unconfirmedEmail;
     /** 失败次数 **/
+    @JsonIgnore
     private Long failedAttempts;
     /** 解锁 **/
+    @JsonIgnore
     private String unlockToken;
     /** 锁定时间 **/
+    @JsonIgnore
     private String lockedAt;
+
+    @OneToOne
+    private EmployeeInfo employeeInfo;
+    
+    @OneToMany(mappedBy = "employee")
+    private Set<FamilyInfo> familyInfos = new HashSet<FamilyInfo>();
+    
+    public Employee() {
+        super();
+    }
+
+    public Employee(String name) {
+        super();
+        this.name = name;
+    }
 
     /**
      * @return the email

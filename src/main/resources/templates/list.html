@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+    <head>
+        <title>Hello World!</title>
+        <link rel="stylesheet" th:href="@{/lib/bootstrap/css/bootstrap.min.css}" />
+        <link rel="stylesheet" th:href="@{/lib/font-awesome/css/font-awesome.min.css}" />
+        <link rel="stylesheet" th:href="@{/css/style.css}" />
+    </head>
+    <body>
+        
+    </body>
+    <script type="text/javascript" th:src="@{/lib/jquery-1.11.1.min.js}"></script>
+    <script type="text/javascript" th:src="@{/lib/bootstrap/js/bootstrap.min.js}"></script>
+    <script>
+    $(function() {
+        $.getJSON("/employee?page=0").done(function(ret) {
+            console.log(ret);
+        });
+    });
+    </script>
+</html>

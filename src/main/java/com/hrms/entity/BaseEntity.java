@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.hrms.listener.SaveAndUpdateListener;
 
 /**
@@ -21,21 +22,21 @@ public abstract class BaseEntity implements Serializable {
 
     @Id
     @GeneratedValue
-    private Integer id;
-
+    protected long id;
+    @JsonIgnore
     private int createUid;
-
+    @JsonIgnore
     private int updateUid;
-
+    @JsonIgnore
     private long createTime;
-
+    @JsonIgnore
     private long updateTime;
 
-    public Integer getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(long id) {
         this.id = id;
     }
 
