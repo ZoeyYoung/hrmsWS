@@ -22,7 +22,7 @@ public abstract class BaseEntity implements Serializable {
 
     @Id
     @GeneratedValue
-    protected long id;
+    protected Long id;
     @JsonIgnore
     private int createUid;
     @JsonIgnore
@@ -32,11 +32,13 @@ public abstract class BaseEntity implements Serializable {
     @JsonIgnore
     private long updateTime;
 
-    public long getId() {
+    private boolean enabled = true;
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -70,6 +72,14 @@ public abstract class BaseEntity implements Serializable {
 
     public void setUpdateUid(int updateUid) {
         this.updateUid = updateUid;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 
 }

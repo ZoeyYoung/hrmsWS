@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+    <head>
+        <title>API管理</title>
+        <link rel="stylesheet" th:href="@{/lib/bootstrap/css/bootstrap.min.css}" />
+        <link rel="stylesheet" th:href="@{/lib/font-awesome/css/font-awesome.min.css}" />
+        <link rel="stylesheet" th:href="@{/css/style.css}" />
+    </head>
+    <body>
+        <h2>API管理</h2>
+        <ul th:each="api:${apis}">
+            <li>
+                <p th:text="${api.name}">名称</p>
+                <p th:text="${api.desc}">描述</p>
+                <p th:text="${api.method}">HTTP方法</p>
+                <p th:text="${api.uri}">相对请求URI</p>
+                <p th:text="${api.request}">请求</p>
+                <p th:text="${api.response}">响应</p>
+            </li>
+        </ul>
+        <form th:action="@{/apis/save}" method="POST">
+            <div>
+                <label>API名称</label>
+                <input type="text" name="name"/>
+            </div>
+            <div>
+                <label>HTTP方法</label>
+                <select name="method">
+                   <option value="GET">GET</option>
+                   <option value="POST">POST</option>
+                   <option value="DELETE">DELETE</option>
+                </select>
+            </div>
+            <div>
+                <label>相对请求URI</label>
+                <input type="text" name="uri"/>
+            </div>
+            <div>
+                <label>API等级</label>
+                <select name="level">
+                   <option value="LOW">LOW</option>
+                   <option value="HIGH">HIGH</option>
+                </select>
+            </div>
+            <div>
+                <label>API描述</label>
+                <textarea name="desc"></textarea>
+            </div>
+            <div>
+                <label>请求</label>
+                <textarea name="request"></textarea>
+            </div>
+            <div>
+                <label>响应</label>
+                <textarea name="response"></textarea>
+            </div>
+            <div>
+                <input type="submit" value="保存"/>
+            </div>
+        </form>
+    </body>
+    <script type="text/javascript" th:src="@{/lib/jquery-1.11.1.min.js}"></script>
+    <script type="text/javascript" th:src="@{/lib/bootstrap/js/bootstrap.min.js}"></script>
+    <script>
+    $(function() {
+        $.getJSON("/apis?page=0").done(function(ret) {
+            console.log(ret);
+        });
+    });
+    </script>
+</html>

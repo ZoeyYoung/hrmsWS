@@ -19,12 +19,22 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class FamilyInfo extends BaseEntity {
 
     private static final long serialVersionUID = 1370543811003669426L;
-    
+
     @JsonIgnore
     @ManyToOne
     private Employee employee;
-    
+
     private String familyName;
+
+    public FamilyInfo() {
+        super();
+    }
+
+    public FamilyInfo(Employee employee, String familyName) {
+        super();
+        this.employee = employee;
+        this.familyName = familyName;
+    }
 
     public String getFamilyName() {
         return familyName;
@@ -34,12 +44,12 @@ public class FamilyInfo extends BaseEntity {
         this.familyName = familyName;
     }
 
-	public Employee getEmployee() {
-		return employee;
-	}
+    public Employee getEmployee() {
+        return employee;
+    }
 
-	public void setEmployee(Employee employee) {
-		this.employee = employee;
-	}
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
+    }
 
 }
